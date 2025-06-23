@@ -41,10 +41,10 @@ class ATMSystem {
     
     private boolean login() {
         System.out.println("\n--- LOGIN ---");
-        System.out.println("Test Accounts Available:");
-        System.out.println("Account: 123456, PIN: 1234, Balance: ₹75,000.00");
-        System.out.println("Account: 789012, PIN: 5678, Balance: ₹1,25,000.00");
-        System.out.println("Account: 345678, PIN: 9012, Balance: ₹37,500.00");
+        // System.out.println("Test Accounts Available:");
+        // System.out.println("Account: 123456, PIN: 1234, Balance: ₹75,000.00");
+        // System.out.println("Account: 789012, PIN: 5678, Balance: ₹1,25,000.00");
+        // System.out.println("Account: 345678, PIN: 9012, Balance: ₹37,500.00");
         System.out.println();
         
         System.out.print("Enter Account Number (or 'exit' to quit): ");
