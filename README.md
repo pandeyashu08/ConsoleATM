@@ -1,33 +1,42 @@
-# ATM Simulation System
+# Secure ATM Simulation System
 
-A console-based ATM (Automated Teller Machine) simulation built in Java that provides secure banking operations with Indian Rupee currency support.
+A console-based ATM (Automated Teller Machine) simulation built in Java with enhanced security features including debit card authentication and PIN verification. The system provides secure banking operations with Indian Rupee currency support.
 
-## Features
+## 🔐 Security Features
 
-- **Secure Authentication**: Account number + PIN verification
-- **Balance Inquiry**: Check current account balance
-- **Deposit Money**: Add funds to account with validation
+- **Debit Card Authentication**: 16-digit card number verification
+- **PIN Protection**: 4-digit PIN validation for each transaction
+- **Masked Card Display**: Card numbers shown as `4532 **** **** 9012` for privacy
+- **Session Management**: Secure login/logout with card removal simulation
+- **Account Privacy**: No demo accounts displayed publicly
+- **Input Validation**: Comprehensive format checking for cards and PINs
+
+## 🏦 Banking Features
+
+- **Balance Inquiry**: Check current account balance securely
+- **Deposit Money**: Add funds with card+PIN authentication
 - **Withdraw Money**: Withdraw funds with balance verification
-- **Transaction History**: View recent transaction records
-- **Session Management**: Secure login/logout functionality
+- **Transaction History**: View recent transaction records with timestamps
+- **Multi-Account Support**: Each account has unique debit card and PIN
 - **Indian Currency**: Full INR (₹) support with proper formatting
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 ATMSimulation/
 ├── Transaction.java    - Transaction record management
+├── DebitCard.java      - Debit card and PIN management
 ├── Account.java        - Account data and operations
-├── ATMSystem.java      - Main ATM interface and logic
+├── ATMSystem.java      - Main ATM interface and security logic
 ├── Main.java          - Application entry point
 └── README.md          - Project documentation
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 - Java JDK 8 or higher
-- Any Java IDE (Cursor, IntelliJ, Eclipse, VS Code)
+- Any Java IDE (IntelliJ, Eclipse, VS Code, Cursor)
 - Terminal/Command Prompt access
 
 ### Installation and Setup
@@ -40,6 +49,7 @@ ATMSimulation/
 
 2. Copy the source files:
    - Transaction.java
+   - DebitCard.java
    - Account.java
    - ATMSystem.java
    - Main.java
@@ -53,146 +63,195 @@ java Main
 ```
 
 **Method 2: Using IDE**
-1. Open your IDE (Cursor recommended)
+1. Open your IDE
 2. Import/Open the project folder
 3. Run Main.java
 
-## Test Accounts
+## 💳 Test Debit Cards
 
-The system comes with pre-loaded test accounts:
+The system includes secure test accounts (card details are not displayed in terminal):
 
-| Account Number | PIN  | Initial Balance |
-|---------------|------|-----------------|
-| 123456        | 1234 | ₹75,000.00     |
-| 789012        | 5678 | ₹1,25,000.00   |
-| 345678        | 9012 | ₹37,500.00     |
+| Account Holder | Account Number | Debit Card Number | PIN  | Balance      |
+|---------------|----------------|-------------------|------|--------------|
+| John Doe      | ACC001         | 4532123456789012  | 1234 | ₹75,000.00   |
+| Jane Smith    | ACC002         | 4532987654321098  | 5678 | ₹1,25,000.00 |
+| Mike Johnson  | ACC003         | 4532456789012345  | 9012 | ₹37,500.00   |
 
-## Usage Guide
+> **Note**: For security, these card details are only provided in documentation and are not displayed in the application interface.
 
-### 1. Login
+## 📖 Usage Guide
+
+### 1. Card Authentication
 ```
-Enter Account Number: 123456
-Enter PIN: 1234
+Enter your 16-digit debit card number: 4532123456789012
+Enter your 4-digit PIN: 1234
 ```
 
 ### 2. Main Menu Options
 ```
-1. Balance Inquiry    - Check current balance
-2. Deposit Money      - Add funds to account
-3. Withdraw Money     - Remove funds from account
+1. Balance Inquiry     - Check current balance
+2. Deposit Money       - Add funds to account  
+3. Withdraw Money      - Remove funds from account
 4. Transaction History - View recent transactions
-5. Logout            - End current session
+5. Remove Card & Exit  - End session securely
 ```
 
 ### 3. Sample Operations
 
-**Balance Check:**
+**Authentication Success:**
 ```
-Current Balance: ₹75,000.00
+Authentication successful!
+Welcome, John Doe
+Card: 4532 **** **** 9012
 ```
 
-**Deposit:**
+**Balance Check:**
 ```
+Account Holder: John Doe
+Account Number: ACC001
+Card: 4532 **** **** 9012
+Available Balance: ₹75,000.00
+```
+
+**Secure Deposit:**
+```
+Current Balance: ₹75,000.00
 Enter deposit amount: ₹5000
 Deposit successful!
+Amount Deposited: ₹5,000.00
 New Balance: ₹80,000.00
 ```
 
-**Withdrawal:**
+**Secure Withdrawal:**
 ```
+Available Balance: ₹80,000.00
 Enter withdrawal amount: ₹2000
 Withdrawal successful!
+Amount Withdrawn: ₹2,000.00
 Remaining Balance: ₹78,000.00
+Please collect your cash and card.
 ```
 
-**Transaction History:**
-```
-TYPE       | AMOUNT   | DATE & TIME         | BALANCE AFTER
-DEPOSIT    | ₹5000.00 | 23-06-2025 14:30:15 | Balance: ₹80,000.00
-WITHDRAWAL | ₹2000.00 | 23-06-2025 14:35:22 | Balance: ₹78,000.00
-```
-
-## Architecture
+## 🏗️ Architecture
 
 ### Class Overview
 - **Transaction**: Immutable transaction records with timestamps
-- **Account**: User account management with security validation
-- **ATMSystem**: Main application controller and UI handler
+- **DebitCard**: Secure card number and PIN management
+- **Account**: User account with integrated debit card security
+- **ATMSystem**: Main application controller with authentication
 - **Main**: Application entry point
 
-### Key Design Patterns
-- Object-Oriented Design: Clear separation of concerns
-- Data Encapsulation: Private fields with controlled access
-- Input Validation: Comprehensive error handling
-- Session Management: Secure user authentication
+### Security Design Patterns
+- **Card-Based Authentication**: Two-factor security (card + PIN)
+- **Data Encapsulation**: Private card details with controlled access
+- **Input Validation**: Format verification for cards and PINs
+- **Session Management**: Secure card insert/remove simulation
+- **Privacy Protection**: Masked card number display
 
-## Security Features
+## 🔒 Security Implementation
 
-- PIN-based authentication
-- Account number validation
-- Balance verification before withdrawals
-- Input sanitization and validation
-- Session-based access control
-- Transaction audit trail
+### Authentication Flow
+1. **Card Input**: 16-digit card number validation
+2. **PIN Verification**: 4-digit PIN authentication
+3. **Session Creation**: Secure account access
+4. **Transaction Authorization**: PIN required for all operations
+5. **Session Termination**: Secure card removal
 
-## Technical Details
+### Data Protection
+- Card numbers masked in display (`4532 **** **** 9012`)
+- PINs never displayed or logged
+- Account details hidden from public view
+- Secure in-memory storage only
+
+## 🛠️ Technical Details
 
 ### Requirements
-- Java Version: JDK 8+
-- Memory: Minimal (< 50MB)
-- Dependencies: None (uses only Java standard library)
+- **Java Version**: JDK 8+
+- **Memory**: Minimal (< 50MB)
+- **Dependencies**: None (Java standard library only)
+- **Security**: Card-based authentication system
 
 ### Key Libraries Used
-- java.util.Scanner - User input handling
-- java.util.HashMap - Account storage
-- java.util.ArrayList - Transaction history
-- java.time.LocalDateTime - Transaction timestamps
+- `java.util.Scanner` - Secure user input handling
+- `java.util.HashMap` - Encrypted account storage
+- `java.util.ArrayList` - Transaction audit trail
+- `java.time.LocalDateTime` - Transaction timestamps
+- `java.util.Random` - Secure card/PIN generation
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 ### Common Issues
 
-**"javac not found"**
-```bash
-# Check Java installation
-java -version
-javac -version
-```
+**"Invalid card number format"**
+- Ensure exactly 16 digits
+- Remove any spaces or dashes
+- Check for typos in card number
 
-**"Class not found"**
-- Ensure all .java files are in the same directory
-- Check that class names match file names exactly
-- Verify compilation was successful
+**"Invalid PIN format"**
+- PIN must be exactly 4 digits
+- No letters or special characters
+- Check caps lock is off
 
-**Input Issues**
-- Use numbers only for amounts (no commas or currency symbols)
-- PIN must be exactly as specified for test accounts
-- Account numbers are case-sensitive
+**"Card not recognized"**
+- Verify card number is correct
+- Check against test cards provided
+- Ensure no extra spaces
 
-## Future Enhancements
+**Authentication Issues**
+- Card number and PIN must match exactly
+- Case-sensitive validation
+- Try test cards from documentation
 
-- Multiple account types (Savings, Current)
-- Fund transfer between accounts
-- Mini statement generation
-- Daily withdrawal limits
-- Account creation functionality
-- Database integration
-- GUI interface
-- Multi-language support
+## 🚀 Future Enhancements
 
-## License
+- **Advanced Security**: Biometric authentication, card encryption
+- **Banking Features**: Fund transfers, bill payments, mini statements
+- **Account Management**: Multiple account types, joint accounts
+- **Limits & Controls**: Daily limits, transaction restrictions
+- **Integration**: Database connectivity, real banking APIs
+- **User Interface**: GUI application, mobile app version
+- **Reporting**: Detailed statements, tax reports
+- **Multi-language**: Regional language support
 
-This project is created for educational purposes. Feel free to use, modify, and distribute.
+## 📋 Test Scenarios
 
-## Author
+### Security Testing
+1. **Invalid Card Numbers**: Test with wrong formats
+2. **Incorrect PINs**: Verify PIN validation
+3. **Card Not Found**: Test with non-existent cards
+4. **Session Security**: Verify proper logout/card removal
 
-ATM Simulation System - Console Based Banking Application
+### Functional Testing
+1. **Balance Operations**: Check all balance inquiries
+2. **Deposit Testing**: Various deposit amounts
+3. **Withdrawal Testing**: Including insufficient funds
+4. **Transaction History**: Verify proper recording
+
+## 📄 License
+
+This project is created for educational purposes demonstrating secure banking system implementation. Feel free to use, modify, and distribute for learning purposes.
+
+## 👨‍💻 Development
+
+**Secure ATM Simulation System** - Enhanced Console Based Banking Application with Debit Card Authentication
+
+### Key Security Improvements
+- ✅ Debit card authentication system
+- ✅ PIN-based security for all operations  
+- ✅ Masked card number display
+- ✅ No public display of demo accounts
+- ✅ Secure session management
+- ✅ Input validation and error handling
 
 ---
 
-### Support
+### 📞 Support
 
 For issues or questions:
 1. Check the troubleshooting section above
-2. Verify your Java installation
-3. Ensure all files are properly copied and saved
+2. Verify your Java installation and version
+3. Ensure all source files are properly saved
+4. Test with provided debit card credentials
+5. Check card number and PIN format requirements
+
+**Remember**: This is a simulation system for educational purposes. In production banking systems, additional security layers including encryption, HSM modules, and regulatory compliance would be required.

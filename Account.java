@@ -1,28 +1,41 @@
-
 // Account.java
 import java.util.ArrayList;
 import java.util.List;
 
 class Account {
     private String accountNumber;
-    private String pin;
+    private String accountHolderName;
     private double balance;
     private List<Transaction> transactionHistory;
+    private DebitCard debitCard;
     
-    public Account(String accountNumber, String pin, double initialBalance) {
+    public Account(String accountNumber, String accountHolderName, double initialBalance) {
         this.accountNumber = accountNumber;
-        this.pin = pin;
+        this.accountHolderName = accountHolderName;
         this.balance = initialBalance;
         this.transactionHistory = new ArrayList<>();
+        this.debitCard = new DebitCard(accountNumber);
     }
     
-    public boolean validatePin(String inputPin) {
-        return this.pin.equals(inputPin);
+    // Constructor for predefined accounts (for testing)
+    public Account(String accountNumber, String accountHolderName, double initialBalance, 
+                   String cardNumber, String pin) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = initialBalance;
+        this.transactionHistory = new ArrayList<>();
+        this.debitCard = new DebitCard(accountNumber, cardNumber, pin);
+    }
+    
+    public boolean validateDebitCard(String cardNumber, String pin) {
+        return debitCard.getCardNumber().equals(cardNumber) && debitCard.validatePin(pin);
     }
     
     public String getAccountNumber() { return accountNumber; }
+    public String getAccountHolderName() { return accountHolderName; }
     public double getBalance() { return balance; }
     public List<Transaction> getTransactionHistory() { return transactionHistory; }
+    public DebitCard getDebitCard() { return debitCard; }
     
     public boolean withdraw(double amount) {
         if (amount <= 0) {
@@ -48,3 +61,4 @@ class Account {
         return true;
     }
 }
+
